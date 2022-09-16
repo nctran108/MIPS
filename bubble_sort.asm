@@ -1,10 +1,14 @@
 .data
 input:.asciiz "Input array = "
+sorted: .asciiz "sorted array = "
 space:	.asciiz " "
 newline: .asciiz "\n"
 .align 2
 array1: .word 1,5,6,4,3,7,9,8,2
 array2: .word 8,1,6,2,3,5,9,7,4
+
+.text
+.globl main
 
 main:
 

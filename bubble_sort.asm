@@ -71,30 +71,30 @@ loop1:
 	bge $s2,$t3,return
 	# $t4 = n - 1 - i = $t3 - i
 	sub $t4,$t3,$s2
-	loop2:	# while(j<n-i-1)
-		bge $t1,$t4,end_loop2
-		# $t2 = 4*j = 4*$t1
-		mul $t2,$t1,4
-		# $t5 = j + 1 which equal 4*$t1 + 4
-		addi $t5,$t2,4
-
-		# load $a0 = A[j] and $a1 = A[j+1]
-		add $t6,$s0,$t2	
-		lw $a0,0($t6)
+loop2:	# while(j<n-i-1)
+	bge $t1,$t4,end_loop2
+	# $t2 = 4*j = 4*$t1
+	mul $t2,$t1,4
+	# $t5 = j + 1 which equal 4*$t1 + 4
+	addi $t5,$t2,4
+	
+	# load $a0 = A[j] and $a1 = A[j+1]
+	add $t6,$s0,$t2	
+	lw $a0,0($t6)
 		
-		add $t7,$s0,$t5
-		lw $a1,0($t7)
-		# if(A[j] > A[j+1])
-		ble $a0,$a1,skip
-		jal swap
-		# store swap value back to array
-		sw $a0,0($t6)
-		sw $a1,0($t7)
-	skip:		
-		# j++
-		addi $t1,$t1,1
-		j loop2
-	end_loop2:
+	add $t7,$s0,$t5
+	lw $a1,0($t7)
+	# if(A[j] > A[j+1])
+	ble $a0,$a1,skip
+	jal swap
+	# store swap value back to array
+	sw $a0,0($t6)
+	sw $a1,0($t7)
+skip:		
+	# j++
+	addi $t1,$t1,1
+	j loop2
+end_loop2:
 	# reset j = 0 or $t1 = 0
 	li $t1,0
 	# i++
